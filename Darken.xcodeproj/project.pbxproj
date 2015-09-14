@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F09BD131BA3887D00ABFC69 /* startupLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD121BA3887D00ABFC69 /* startupLaunch.swift */; };
+		6F4597D21BA766E2005598D5 /* Darken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4597D11BA766E2005598D5 /* Darken.swift */; };
 		6F7FBCD81BA269EE007702EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7FBCD71BA269EE007702EB /* AppDelegate.swift */; };
 		6F7FBCDA1BA269EE007702EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7FBCD91BA269EE007702EB /* Images.xcassets */; };
 		6F7FBCDD1BA269EE007702EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7FBCDB1BA269EE007702EB /* MainMenu.xib */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		6F09BD121BA3887D00ABFC69 /* startupLaunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = startupLaunch.swift; sourceTree = "<group>"; };
+		6F4597D11BA766E2005598D5 /* Darken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Darken.swift; sourceTree = "<group>"; };
 		6F7FBCD21BA269EE007702EB /* Darken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Darken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7FBCD61BA269EE007702EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F7FBCD71BA269EE007702EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				6F7FBCDB1BA269EE007702EB /* MainMenu.xib */,
 				6F7FBCD51BA269EE007702EB /* Supporting Files */,
 				6F09BD121BA3887D00ABFC69 /* startupLaunch.swift */,
+				6F4597D11BA766E2005598D5 /* Darken.swift */,
 			);
 			path = Darken;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F4597D21BA766E2005598D5 /* Darken.swift in Sources */,
 				6F09BD131BA3887D00ABFC69 /* startupLaunch.swift in Sources */,
 				6F7FBCD81BA269EE007702EB /* AppDelegate.swift in Sources */,
 			);
