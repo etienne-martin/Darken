@@ -5,7 +5,7 @@ Adjust the brightness of your external displays using your mac's built-in ambien
 
 [Download Darken (1.3MB)](https://github.com/etienne-martin/Darken/raw/master/Archive/Darken/Applications/Darken.zip)
 
-The licence lets you remix, pimp, tweak and build upon Darken with credit to [Etienne Martin](http://etiennemartin.ca/). Any project based on Darken must be non-commercial.
+The license lets you remix, pimp, tweak and build upon Darken with credit to [Etienne Martin](http://etiennemartin.ca/). Any project based on Darken must be non-commercial.
 
 [Creative Commons Attribution-NonCommercial license](https://raw.githubusercontent.com/etienne-martin/Darken/master/LICENSE.txt)
 
