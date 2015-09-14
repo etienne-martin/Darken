@@ -1,4 +1,4 @@
-# ![alt tag](https://raw.githubusercontent.com/etienne-martin/Darken/master/icon/icon32.png) Darken
+# ![alt tag](https://raw.githubusercontent.com/etienne-martin/Darken/master/icon/icon16.png) Darken
 
 Adjust the brightness of your external displays using your mac's built-in ambient light sensor. Darken works by adjusting the gamma values of your external displays.
 
