@@ -301,6 +301,9 @@ public class Darken: NSObject{
     
     func quit(sender: NSMenuItem) {
         
+        // Remove from login items
+        StartupLaunch.setLaunchOnLogin(false)
+        
         interval!.invalidate()
         interval = nil
         
