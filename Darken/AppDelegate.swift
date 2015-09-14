@@ -42,9 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let TXT_turn_darken_on = "Turn Darken On"
     let TXT_turn_darken_off = "Turn Darken Off"
     
-    var steps:Int = 8
-    var stepsDefault:Int = 8
-    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
         /* Kill previous instances of the app */
@@ -221,6 +218,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 
                 var difference:Float = ((gammaValues[2] as! Float)-percent) - redMax.memory as Float
                 
+                var steps:Int = 8
                 var step:Int = 0
                 var sleep:useconds_t = useconds_t((250*1000)/steps);
                 
@@ -362,11 +360,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             println("Screen config changed")
         
             setBrightness()
-        
-            steps = 1
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-                self.steps = self.stepsDefault
-            }
         
             //globalBrightness = 1.0
             //brightnessToken = "0"
