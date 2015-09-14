@@ -7,6 +7,6 @@ Adjust the brightness of your external displays using your mac's built-in ambien
 
 The licence lets you remix, pimp, tweak and build upon Darken with credit to [Etienne Martin](http://etiennemartin.ca/). Any project based on Darken must be non-commercial.
 
-[Creative Commons Attribution-NonCommercial licence](https://raw.githubusercontent.com/etienne-martin/Darken/master/LICENSE.txt)
+[Creative Commons Attribution-NonCommercial license](https://raw.githubusercontent.com/etienne-martin/Darken/master/LICENSE.txt)
 
 ###### Feel free to contribute!
