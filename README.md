@@ -3,4 +3,4 @@ Adjust the brightness of your external displays using your mac's built-in ambien
 
 ![alt tag](https://raw.githubusercontent.com/etienne-martin/Darken/master/screenshot.png)
 
-[Download](https://github.com/etienne-martin/Darken/raw/master/Archive/Darken/Applications/Darken.zip)
+[Download App](https://github.com/etienne-martin/Darken/raw/master/Archive/Darken/Applications/Darken.zip)
