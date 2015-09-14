@@ -1,5 +1,8 @@
-# Darken
-Adjust the brightness of your external displays using your mac's built-in ambient light sensor.
+![alt tag](https://raw.githubusercontent.com/etienne-martin/Darken/master/icon/logo.png)
+
+Adjust the brightness of your external displays using your mac's built-in ambient light sensor. Darken works by adjusting the gamma values of your external displays.
+
+##### Toggle On/Off
 
 ![alt tag](https://raw.githubusercontent.com/etienne-martin/Darken/master/screenshot.png)
 
