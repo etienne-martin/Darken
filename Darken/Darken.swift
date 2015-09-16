@@ -320,6 +320,7 @@ public class Darken: NSObject{
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.25 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
                 // Terminate the application
+                CGDisplayRestoreColorSyncSettings()
                 NSApplication.sharedApplication().terminate(self)
             }
         }else{
