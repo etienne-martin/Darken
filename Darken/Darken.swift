@@ -272,6 +272,11 @@ public class Darken: NSObject{
             
             //println(firstChunk)
             
+            let maxChunkRange = Range(
+                start: firstChunk.startIndex,
+                end: firstChunk.rangeOfString(",")!.startIndex)
+            let maxBrightness = firstChunk.substringWithRange(maxChunkRange).toInt()!
+            
             var chunkStart = firstChunk.rangeOfString(",\"value\"=")
             var chunkEnd = firstChunk.rangeOfString("}")
             
@@ -282,7 +287,7 @@ public class Darken: NSObject{
                     end: chunkEnd!.startIndex)
                 let secondChunk = firstChunk.substringWithRange(secondChunkRange).toInt()!
                 
-                let result:Float = Float(secondChunk)/1024.0
+                let result:Float = Float(secondChunk)/Float(maxBrightness)
                 
                 indicatorButton.title = "Brightness: \(Int(round(result*100)))%"
                 globalBrightness = result
