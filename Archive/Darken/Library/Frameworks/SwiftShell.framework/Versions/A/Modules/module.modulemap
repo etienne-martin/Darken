@@ -1,3 +1,0 @@
-framework module SwiftShell {
-    header "SwiftShell-Swift.h"
-}

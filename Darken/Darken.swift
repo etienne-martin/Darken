@@ -15,7 +15,6 @@ public class Darken: NSObject{
     var statusMenu = NSStatusBar.systemStatusBar()
     var statusItem : NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
-    var menuItem : NSMenuItem = NSMenuItem()
     
     var gammaArray = [AnyObject]()
     
@@ -23,6 +22,7 @@ public class Darken: NSObject{
     var toggleButton = NSMenuItem()
     var toggleState = "0"
     var indicatorButton = NSMenuItem()
+    var brigtnessSlider = NSSlider()
     
     var brightnessToken:String = "0"
     var globalBrightness: Float = 1.0
@@ -61,9 +61,28 @@ public class Darken: NSObject{
         indicatorButton.target = self
         indicatorButton.enabled = false
         
+        brigtnessSlider = NSSlider(frame: NSRect(x: 0, y: 0, width: 200, height: 22))
+        
+        brigtnessSlider.continuous = false; // false makes it call only once you let go
+        brigtnessSlider.target = self
+        brigtnessSlider.action = Selector("brigtnessAdjustChanged:")
+        
+        if let brigtnessAdjustState: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("brigtnessAdjustState") {
+            brigtnessSlider.floatValue = Float(brigtnessAdjustState as! NSNumber)
+        }else{
+            // Default brightness adjustement: 0.5
+            brigtnessSlider.floatValue = 0.5
+        }
+        
+        let brigtnessAdjust = NSMenuItem()
+        brigtnessAdjust.title = "Adjust brightness"
+        brigtnessAdjust.view = brigtnessSlider
+        
         menu.insertItem(quitButton, atIndex: 0)
         menu.insertItem(NSMenuItem.separatorItem(), atIndex: 0)
         menu.insertItem(toggleButton, atIndex: 0)
+        menu.insertItem(NSMenuItem.separatorItem(), atIndex: 0)
+        menu.insertItem(brigtnessAdjust, atIndex: 0)
         menu.insertItem(NSMenuItem.separatorItem(), atIndex: 0)
         menu.insertItem(indicatorButton, atIndex: 0)
         
@@ -91,9 +110,15 @@ public class Darken: NSObject{
         }
     }
     
+    func brigtnessAdjustChanged(sender: NSSlider) {
+        // Store the current state of the application (on/off) into the user prefs
+        NSUserDefaults.standardUserDefaults().setObject(brigtnessSlider.floatValue, forKey: "brigtnessAdjustState")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
     func setBrightness(){
         
-        let percent:Float = 1.0-(globalBrightness) // Inverse value
+        let percent:Float = 1.0-(globalBrightness) // Invert value
         
         var displayCount: UInt32 = 0;
         var result = CGGetActiveDisplayList(0, nil, &displayCount)
@@ -118,7 +143,7 @@ public class Darken: NSObject{
                 
                 for display in gammaArray {
                     
-                    if( "\(display[0])" == "\(displayID)" ){ // If the gamma valus of the display has already been listed
+                    if( "\(display[0])" == "\(displayID)" ){ // If the gamma values of the display have already been listed
                         
                         inArray = true
                         
@@ -287,9 +312,15 @@ public class Darken: NSObject{
                     end: chunkEnd!.startIndex)
                 let secondChunk = Int(firstChunk.substringWithRange(secondChunkRange))!
                 
-                let result:Float = Float(secondChunk)/Float(maxBrightness)
+                var result:Float = Float(secondChunk)/Float(maxBrightness)
+                
+                var gap = 1.0-result
+                    gap = gap*brigtnessSlider.floatValue
+                
+                    result = 1.0-gap;
                 
                 indicatorButton.title = "Brightness: \(Int(round(result*100)))%"
+                
                 globalBrightness = result
                 
             }else{
