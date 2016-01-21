@@ -39,7 +39,7 @@ public class Darken: NSObject{
         /* MenubarApp*/
         statusItem = statusMenu.statusItemWithLength(-1)
         let icon = NSImage(named: "statusIconOFF")
-        icon!.setTemplate(true)
+        icon!.setTemplate = true
         statusItem.image = icon
         statusItem.menu = menu
         
@@ -98,13 +98,13 @@ public class Darken: NSObject{
         var displayCount: UInt32 = 0;
         var result = CGGetActiveDisplayList(0, nil, &displayCount)
         if (result != 0) {
-            println("error: \(result)")
+            print("error: \(result)")
         }
         let allocated = Int(displayCount)
         var activeDisplays = UnsafeMutablePointer<CGDirectDisplayID>.alloc(allocated)
         result = CGGetActiveDisplayList(displayCount, activeDisplays, &displayCount)
         if (result != 0) {
-            println("error: \(result)")
+            print("error: \(result)")
         }
         for i in 0..<displayCount {
             
@@ -187,7 +187,7 @@ public class Darken: NSObject{
                 
                 var difference:Float = ((gammaValues[2] as! Float)-percent) - redMax.memory as Float
                 
-                println("\(lastAppliedBrightness) \(globalBrightness) \(steps)")
+                print("\(lastAppliedBrightness) \(globalBrightness) \(steps)")
                 
                 if( lastAppliedBrightness != globalBrightness ){ // Animate only when the brigtness change
                     steps = 8 // Frames per 0.25 seconds
@@ -266,7 +266,7 @@ public class Darken: NSObject{
         if( chunkStart != nil ){
             
             let firstChunkRange = Range(
-                start: (advance(chunkStart!.endIndex, 0)),
+                start: (chunkStart!.endIndex.advancedBy(0)),
                 end: chunkEnd)
             let firstChunk = systemBrightness.substringWithRange(firstChunkRange)
             
@@ -275,7 +275,7 @@ public class Darken: NSObject{
             let maxChunkRange = Range(
                 start: firstChunk.startIndex,
                 end: firstChunk.rangeOfString(",")!.startIndex)
-            let maxBrightness = firstChunk.substringWithRange(maxChunkRange).toInt()!
+            let maxBrightness = Int(firstChunk.substringWithRange(maxChunkRange))!
             
             var chunkStart = firstChunk.rangeOfString(",\"value\"=")
             var chunkEnd = firstChunk.rangeOfString("}")
@@ -283,9 +283,9 @@ public class Darken: NSObject{
             if( chunkStart != nil ){
                 
                 let secondChunkRange = Range(
-                    start: (advance(chunkStart!.endIndex, 0)),
+                    start: (chunkStart!.endIndex.advancedBy(0)),
                     end: chunkEnd!.startIndex)
-                let secondChunk = firstChunk.substringWithRange(secondChunkRange).toInt()!
+                let secondChunk = Int(firstChunk.substringWithRange(secondChunkRange))!
                 
                 let result:Float = Float(secondChunk)/Float(maxBrightness)
                 
@@ -336,7 +336,7 @@ public class Darken: NSObject{
         toggleButton.title = TXT_turn_darken_off
         
         let icon = NSImage(named: "statusIcon")
-        icon!.setTemplate(true)
+        icon!.setTemplate = true
         statusItem.image = icon
         
         // Set brightness instantly
@@ -346,7 +346,7 @@ public class Darken: NSObject{
     func applicationDidChangeScreenParameters(notification: NSNotification) {
         
         // Screen config changed
-        println("Screen config changed")
+        print("Screen config changed")
         
         // Set brightness instantly
         setBrightness()
@@ -368,7 +368,7 @@ public class Darken: NSObject{
             setBrightness()
             
             let icon = NSImage(named: "statusIconOFF")
-            icon!.setTemplate(true)
+            icon!.setTemplate = true
             statusItem.image = icon
         }else{
             toggleState = "1"
