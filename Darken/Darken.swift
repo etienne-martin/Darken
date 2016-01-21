@@ -39,14 +39,14 @@ public class Darken: NSObject{
         /* MenubarApp*/
         statusItem = statusMenu.statusItemWithLength(-1)
         let icon = NSImage(named: "statusIconOFF")
-        icon!.setTemplate(true)
+        icon?.template = true
         statusItem.image = icon
         statusItem.menu = menu
         
         // Required to manually enable and disable menu items
         menu.autoenablesItems = false
         
-        var quitButton = NSMenuItem()
+        let quitButton = NSMenuItem()
         quitButton.title = "Quit"
         quitButton.action = Selector("quit:")
         quitButton.target = self
@@ -72,7 +72,7 @@ public class Darken: NSObject{
             StartupLaunch.setLaunchOnLogin(true)
         }
         
-        var brightnessInterval = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "getBrightness", userInfo: nil, repeats: true)
+        let brightnessInterval = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "getBrightness", userInfo: nil, repeats: true)
         // Register timer to refresh while menu is open
         NSRunLoop.currentRunLoop().addTimer(brightnessInterval, forMode: NSRunLoopCommonModes)
         
@@ -93,22 +93,22 @@ public class Darken: NSObject{
     
     func setBrightness(){
         
-        var percent:Float = 1.0-(globalBrightness) // Inverse value
+        let percent:Float = 1.0-(globalBrightness) // Inverse value
         
         var displayCount: UInt32 = 0;
         var result = CGGetActiveDisplayList(0, nil, &displayCount)
-        if (result != 0) {
-            println("error: \(result)")
+        if( result != CGError.Success ){
+            print("error: \(result)")
         }
         let allocated = Int(displayCount)
-        var activeDisplays = UnsafeMutablePointer<CGDirectDisplayID>.alloc(allocated)
+        let activeDisplays = UnsafeMutablePointer<CGDirectDisplayID>.alloc(allocated)
         result = CGGetActiveDisplayList(displayCount, activeDisplays, &displayCount)
-        if (result != 0) {
-            println("error: \(result)")
+        if( result != CGError.Success ){
+            print("error: \(result)")
         }
         for i in 0..<displayCount {
             
-            var displayID = activeDisplays[Int(i)]
+            let displayID = activeDisplays[Int(i)]
             
             if( CGDisplayIsBuiltin(displayID) == 0 ){ // If the display is not builtin
                 
@@ -123,14 +123,14 @@ public class Darken: NSObject{
                         inArray = true
                         
                         gammaValues = ["\(displayID)" as String,
-                            display[1],     // redMin
-                            display[2] as! Float, // redMax
-                            display[3],     // redGamma
-                            display[4],     // greenMin
-                            display[5] as! Float, // greenMax
-                            display[6],     // greenGamma
-                            display[7],     // blueMin
-                            display[8] as! Float, // blueMax
+                            display[1],             // redMin
+                            display[2] as! Float,   // redMax
+                            display[3],             // redGamma
+                            display[4],             // greenMin
+                            display[5] as! Float,   // greenMax
+                            display[6],             // greenGamma
+                            display[7],             // blueMin
+                            display[8] as! Float,   // blueMax
                             display[9]]
                         
                         break
@@ -138,15 +138,15 @@ public class Darken: NSObject{
                 }
                 
                 // Allocate memory for gamma values
-                var redMin = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var redMax = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var redGamma = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var greenMin = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var greenMax = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var greenGamma = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var blueMin = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var blueMax = UnsafeMutablePointer<CGGammaValue>.alloc(1)
-                var blueGamma = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let redMin = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let redMax = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let redGamma = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let greenMin = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let greenMax = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let greenGamma = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let blueMin = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let blueMax = UnsafeMutablePointer<CGGammaValue>.alloc(1)
+                let blueGamma = UnsafeMutablePointer<CGGammaValue>.alloc(1)
                 
                 redMin.initialize(0);
                 redMax.initialize(0);
@@ -160,48 +160,48 @@ public class Darken: NSObject{
                 
                 CGGetDisplayTransferByFormula(displayID,
                     redMin,     // redMin
-                    redMax, // redMax
-                    redGamma,     // redGamma
-                    greenMin,     // greenMin
-                    greenMax, // greenMax
-                    greenGamma,     // greenGamma
-                    blueMin,     // blueMin
-                    blueMax, // blueMax
-                    blueGamma)     // blueGamma
+                    redMax,     // redMax
+                    redGamma,   // redGamma
+                    greenMin,   // greenMin
+                    greenMax,   // greenMax
+                    greenGamma, // greenGamma
+                    blueMin,    // blueMin
+                    blueMax,    // blueMax
+                    blueGamma)  // blueGamma
                 
                 if inArray == false {
                     
                     gammaValues = ["\(displayID)" as String,
                         redMin.memory as Float,     // redMin
-                        redMax.memory as Float, // redMax
-                        redGamma.memory as Float,     // redGamma
-                        greenMin.memory as Float,     // greenMin
-                        greenMax.memory as Float, // greenMax
-                        greenGamma.memory as Float,     // greenGamma
-                        blueMin.memory as Float,     // blueMin
-                        blueMax.memory as Float, // blueMax
+                        redMax.memory as Float,     // redMax
+                        redGamma.memory as Float,   // redGamma
+                        greenMin.memory as Float,   // greenMin
+                        greenMax.memory as Float,   // greenMax
+                        greenGamma.memory as Float, // greenGamma
+                        blueMin.memory as Float,    // blueMin
+                        blueMax.memory as Float,    // blueMax
                         blueGamma.memory as Float]
                     
                     gammaArray.insert(gammaValues,atIndex:0)
                 }
                 
-                var difference:Float = ((gammaValues[2] as! Float)-percent) - redMax.memory as Float
+                let difference:Float = ((gammaValues[2] as! Float)-percent) - redMax.memory as Float
                 
-                println("\(lastAppliedBrightness) \(globalBrightness) \(steps)")
+                print("\(lastAppliedBrightness) \(globalBrightness) \(steps)")
                 
                 if( lastAppliedBrightness != globalBrightness ){ // Animate only when the brigtness change
-                    steps = 8 // Frames per 0.25 seconds
+                    steps = 8 // Frames per 250 milliseconds
                 }else{
                     steps = 1
                 }
                 lastAppliedBrightness = globalBrightness
                 
                 var step:Int = 0
-                var sleep:useconds_t = useconds_t((250*1000)/steps);
+                let sleep:useconds_t = useconds_t((250*1000)/steps);
                 
                 if( difference != 0.0 ){
                     
-                    var currentBrightnessToken = "\(NSDate().timeIntervalSince1970 * 1000)"
+                    let currentBrightnessToken = "\(NSDate().timeIntervalSince1970 * 1000)"
                     brightnessToken = currentBrightnessToken
                     
                     for (step = 0; step <= steps; step++){
@@ -210,18 +210,18 @@ public class Darken: NSObject{
                             break
                         }
                         
-                        var fade:Float = (difference/Float(steps))*Float(step)
+                        let fade:Float = (difference/Float(steps))*Float(step)
                         
                         CGSetDisplayTransferByFormula( displayID,
-                            gammaValues[1] as! CGGammaValue,     // redMin
-                            (redMax.memory+fade) as CGGammaValue, // redMax
-                            gammaValues[3] as! CGGammaValue,     // redGamma
-                            gammaValues[4] as! CGGammaValue,     // greenMin
+                            gammaValues[1] as! CGGammaValue,        // redMin
+                            (redMax.memory+fade) as CGGammaValue,   // redMax
+                            gammaValues[3] as! CGGammaValue,        // redGamma
+                            gammaValues[4] as! CGGammaValue,        // greenMin
                             (greenMax.memory+fade) as CGGammaValue, // greenMax
-                            gammaValues[6] as! CGGammaValue,     // greenGamma
-                            gammaValues[7] as! CGGammaValue,     // blueMin
-                            (blueMax.memory+fade) as CGGammaValue, // blueMax
-                            gammaValues[9] as! CGGammaValue)     // blueGamma
+                            gammaValues[6] as! CGGammaValue,        // greenGamma
+                            gammaValues[7] as! CGGammaValue,        // blueMin
+                            (blueMax.memory+fade) as CGGammaValue,  // blueMax
+                            gammaValues[9] as! CGGammaValue)        // blueGamma
                         
                         usleep(sleep)
                     }
@@ -260,13 +260,13 @@ public class Darken: NSObject{
         // Lets detect that brightness level
         let systemBrightness = run("ioreg -c AppleBacklightDisplay | grep brightness").read()
         
-        var chunkStart = systemBrightness.rangeOfString("brightness\"={\"max\"=")
-        var chunkEnd = systemBrightness.endIndex
+        let chunkStart = systemBrightness.rangeOfString("brightness\"={\"max\"=")
+        let chunkEnd = systemBrightness.endIndex
         
         if( chunkStart != nil ){
             
             let firstChunkRange = Range(
-                start: (advance(chunkStart!.endIndex, 0)),
+                start: (chunkStart!.endIndex.advancedBy(0)),
                 end: chunkEnd)
             let firstChunk = systemBrightness.substringWithRange(firstChunkRange)
             
@@ -275,17 +275,17 @@ public class Darken: NSObject{
             let maxChunkRange = Range(
                 start: firstChunk.startIndex,
                 end: firstChunk.rangeOfString(",")!.startIndex)
-            let maxBrightness = firstChunk.substringWithRange(maxChunkRange).toInt()!
+            let maxBrightness = Int(firstChunk.substringWithRange(maxChunkRange))!
             
-            var chunkStart = firstChunk.rangeOfString(",\"value\"=")
-            var chunkEnd = firstChunk.rangeOfString("}")
+            let chunkStart = firstChunk.rangeOfString(",\"value\"=")
+            let chunkEnd = firstChunk.rangeOfString("}")
             
             if( chunkStart != nil ){
                 
                 let secondChunkRange = Range(
-                    start: (advance(chunkStart!.endIndex, 0)),
+                    start: (chunkStart!.endIndex.advancedBy(0)),
                     end: chunkEnd!.startIndex)
-                let secondChunk = firstChunk.substringWithRange(secondChunkRange).toInt()!
+                let secondChunk = Int(firstChunk.substringWithRange(secondChunkRange))!
                 
                 let result:Float = Float(secondChunk)/Float(maxBrightness)
                 
@@ -336,7 +336,7 @@ public class Darken: NSObject{
         toggleButton.title = TXT_turn_darken_off
         
         let icon = NSImage(named: "statusIcon")
-        icon!.setTemplate(true)
+        icon?.template = true
         statusItem.image = icon
         
         // Set brightness instantly
@@ -346,7 +346,7 @@ public class Darken: NSObject{
     func applicationDidChangeScreenParameters(notification: NSNotification) {
         
         // Screen config changed
-        println("Screen config changed")
+        print("Screen config changed")
         
         // Set brightness instantly
         setBrightness()
@@ -368,7 +368,7 @@ public class Darken: NSObject{
             setBrightness()
             
             let icon = NSImage(named: "statusIconOFF")
-            icon!.setTemplate(true)
+            icon?.template = true
             statusItem.image = icon
         }else{
             toggleState = "1"
