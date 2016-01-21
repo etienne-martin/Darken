@@ -1,4 +1,4 @@
-# Darken ![alt tag](https://raw.githubusercontent.com/etienne-martin/Darken/master/icon/icon16.png)
+# Darken ![alt tag](https://git.emartin.ca/emartin/Darken/raw/master/icon/icon16.png)
 
 Adjust the brightness of your external displays using your mac's built-in ambient light sensor.
 
@@ -10,6 +10,6 @@ Adjust the brightness of your external displays using your mac's built-in ambien
 
 The license lets you tweak, pimp and build upon this work with credit to [Etienne Martin](http://etiennemartin.ca/). Any project based on this work must be non-commercial.
 
-[Creative Commons Attribution-NonCommercial license](https://raw.githubusercontent.com/etienne-martin/Darken/master/LICENSE.txt)
+[Creative Commons Attribution-NonCommercial license](https://git.emartin.ca/emartin/Darken/raw/master/LICENSE.txt)
 
 ###### Feel free to contribute!
