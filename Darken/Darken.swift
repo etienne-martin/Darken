@@ -61,7 +61,7 @@ public class Darken: NSObject{
         indicatorButton.target = self
         indicatorButton.enabled = false
         
-        brigtnessSlider = NSSlider(frame: NSRect(x: 0, y: 0, width: 200, height: 22))
+        brigtnessSlider = NSSlider(frame: NSRect(x: 20, y: 0, width: 160, height: 22))
         
         brigtnessSlider.continuous = false; // false makes it call only once you let go
         brigtnessSlider.target = self
@@ -74,9 +74,13 @@ public class Darken: NSObject{
             brigtnessSlider.floatValue = 0.5
         }
         
+        let sliderView = NSView()
+            sliderView.frame = NSRect(x: 0, y: 0, width: 200, height: 22)
+            sliderView.addSubview(brigtnessSlider)
+        
         let brigtnessAdjust = NSMenuItem()
         brigtnessAdjust.title = "Adjust brightness"
-        brigtnessAdjust.view = brigtnessSlider
+        brigtnessAdjust.view = sliderView
         
         menu.insertItem(quitButton, atIndex: 0)
         menu.insertItem(NSMenuItem.separatorItem(), atIndex: 0)
